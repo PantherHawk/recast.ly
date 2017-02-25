@@ -5,14 +5,14 @@ class App extends React.Component {
     this.state = {
       currentVideo: window.exampleVideoData[0],
       videoList: window.exampleVideoData
-      };
-    }
+    };
+  }
 
 
   handleClick(newVideo) {
     this.setState({
       currentVideo: window.exampleVideoData[newVideo]
-    })
+    });
   }
 
   render() {
