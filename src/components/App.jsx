@@ -1,21 +1,33 @@
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {exampleVideo: window.exampleVideoData[0], exampleVideoList: window.exampleVideoData};
+  constructor() {
+    super();
+    this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      currentVideo: window.exampleVideoData[0],
+      videoList: window.exampleVideoData
+      };
+    }
+
+
+  handleClick(newVideo) {
+    this.setState({
+      currentVideo: window.exampleVideoData[newVideo]
+    })
   }
+
   render() {
     return (
-           <div>
+    <div>
      <Nav />
      <div className="col-md-7">
-       <VideoPlayer video = {this.state.exampleVideo}/>
+       <VideoPlayer video={this.state.currentVideo}/>
      </div>
      <div className="col-md-5">
-     <VideoList videos = {this.state.exampleVideoList} />
+     <VideoList click={this.handleClick} videos={this.state.videoList} />
     </div>
-   </div>
-      );
-    }
+  </div>
+    );
+  }
 }
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
