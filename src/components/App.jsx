@@ -22,13 +22,13 @@ class App extends React.Component {
       type: 'video'
     };
 
-      this.props.searchYouTube(options, (videos) => {
-        this.setState({
-          currentVideo: videos[0],
-          videoList: videos
-        });
+    this.props.searchYouTube(options, (videos) => {
+      this.setState({
+        currentVideo: videos[0],
+        videoList: videos
       });
-      {console.log(this.state)}
+    });
+
   }
 
   handleClick(newVideo) {
