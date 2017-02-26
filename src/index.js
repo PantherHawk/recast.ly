@@ -30,6 +30,4 @@
 //   }
 // }
 
-ReactDOM.render(<App />, document.getElementById('app'));
-
-// videos={exampleVideoData}
+ReactDOM.render(<App searchYouTube={window.searchYouTube} API_KEY={window.YOUTUBE_API_KEY}/>, document.getElementById('app'));

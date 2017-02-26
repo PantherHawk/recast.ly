@@ -1,31 +1,53 @@
 class App extends React.Component {
-  constructor() {
-    super();
-    this.handleClick = this.handleClick.bind(this);
+  constructor(props) {
+    super(props);
+
     this.state = {
       currentVideo: window.exampleVideoData[0],
       videoList: window.exampleVideoData
     };
   }
 
+  componentDidMount() {
+    this.getYouTubeVideos('cheese');
+  }
+
+  getYouTubeVideos(query) {
+    console.log(query);
+    var options = {
+      key: this.props.API_KEY,
+      query: query,
+      part: 'snippet',
+      max: 5,
+      type: 'video'
+    };
+
+      this.props.searchYouTube(options, (videos) => {
+        this.setState({
+          currentVideo: videos[0],
+          videoList: videos
+        });
+      });
+      {console.log(this.state)}
+  }
 
   handleClick(newVideo) {
     this.setState({
-      currentVideo: window.exampleVideoData[newVideo]
+      currentVideo: newVideo
     });
   }
 
   render() {
     return (
     <div>
-     <Nav />
-     <div className="col-md-7">
-       <VideoPlayer video={this.state.currentVideo}/>
-     </div>
-     <div className="col-md-5">
-     <VideoList click={this.handleClick} videos={this.state.videoList} />
+      <Nav searchInput={this.getYouTubeVideos.bind(this)}/>
+      <div className="col-md-7">
+        <VideoPlayer video={this.state.currentVideo}/>
+      </div>
+      <div className="col-md-5">
+        <VideoList click={this.handleClick.bind(this)} videos={this.state.videoList} />
+      </div>
     </div>
-  </div>
     );
   }
 }
